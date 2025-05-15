@@ -1,6 +1,7 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
@@ -14,7 +15,8 @@ public class Main {
     private static jm.task.core.jdbc.util.Util Util;
 
     public static void main(String[] args) {
-        UserService userService = new UserServiceImpl();
+        UserDao userDao = new UserDaoHibernateImpl();
+        UserService userService = new UserServiceImpl(userDao);
 
         System.out.println("Создание таблицы User");
         userService.dropUsersTable();
